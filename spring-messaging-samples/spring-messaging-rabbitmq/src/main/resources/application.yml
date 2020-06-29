@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-messaging-rabbitmq
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+
+broker:
+  queueName: spring-boot
+  topicExchange: spring-boot-exchange
+  xMaxLength: 5
+  receiverStr: receiveMessage

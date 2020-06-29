@@ -1,0 +1,114 @@
+spring-boot-oauth-client
+
+mvn clean package
+mvn spring-boot:run
+
+Access token :
+curl -X POST -kliu clientapp2:1234562 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d grant_type=password \
+    -d scope=read%20write \
+    -d client_id=clientapp2 \
+    -d client_secret=1234562 \
+    -d username=user \
+    -d password=user \
+    | python -mjson.tool
+
+curl -X POST -liu \
+    clientapp:123456 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d "password=user&username=user&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp" \
+    | python -mjson.tool
+
+-d redirect_uri=http://www.hascode.com
+
+{
+    "access_token":"0bacfb6d-399d-4a8c-bf74-a147c75b1d88",
+    "token_type":"bearer",
+    "refresh_token":"d4c8d1da-29d2-452c-b641-ca3de15db4e7",
+    "expires_in":43199,
+    "scope":"openid"
+}
+
+Keycloak :
+
+-------------------
+
+{
+  "realm": "test",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "test",
+  "public-client": true,
+  "use-resource-role-mappings": true,
+  "confidential-port": 0
+}
+
+
+curl -X POST 'http://localhost:8080/auth/realms/test/protocol/openid-connect/token' \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "username=admin" \
+-d "password=admin" \
+-d "grant_type=password" \
+-d "client_id=test"
+
+curl -H "Authorization: Bearer $TOKEN_USER" -H "Accept:application/json" http://localhost:9001/auth/realms/test/account
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/auth/realms/test/protocol/openid-connect/userinfo
+
+------------------
+
+curl http://localhost:9001/oauthclient/secured/test | python -mjson.tool
+curl http://localhost:9001/oauthclient/index/test | python -mjson.tool
+
+curl http://localhost:9001/secured/user | python -mjson.tool
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/oauthclient/secured/test | python -mjson.tool
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/oauthclient/auth/user | python -mjson.tool
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/oauthclient/auth/me | python -mjson.tool
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9000/oauthserver/auth/user
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9763/oauth2/userinfo
+
+curl -H "Authorization: Bearer $TOKEN_USER" https://localhost:9443/oauth2/userinfo?schema=openid
+curl -H "Authorization: Bearer $TOKEN_ADMIN" https://localhost:9443/oauth2/userinfo?schema=openid
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo
+
+
+
+
+Refresh token :
+curl -li --data \
+    "grant_type=refresh_token&client_id=clientapp&refresh_token=96ddca13-d727-49a0-8b2b-89b572bebfae" \
+    -k clientapp:123456@localhost:9000/oauth/token \
+    | python -mjson.tool
+
+curl -liu \
+    clientapp:123456 \
+    http://localhost:9000/oauthserver/oauth/token \
+    -d grant_type=refresh_token \
+    -d client_id=clientapp \
+    -d refresh_token=96ddca13-d727-49a0-8b2b-89b572bebfae \
+    -d scope=read%20write \
+    -d client_id=clientapp \
+    -d client_secret=123456 \
+    -d username=user \
+    -d password=user \
+    | python -mjson.tool
+
+
+ #client:
+    #  clientId: test
+    #  clientSecret: e85f61f0-6d04-4095-ac64-621aefad2de9
+    #  accessTokenUri: http://localhost:8080/auth/realms/test/protocol/openid-connect/token
+    #  userAuthorizationUri: http://localhost:8080/auth/realms/test/protocol/openid-connect/auth
+    #  clientAuthenticationScheme: form
+    #resource:
+    #  userInfoUri: http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo
+    #  preferTokenInfo: false

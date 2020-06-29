@@ -1,0 +1,18 @@
+version: '2.1'
+
+services:
+
+  test-service:
+    image: test-service
+    depends_on:
+      - micro-service-server
+
+  debug-service:
+    image: debug-service
+    depends_on:
+      - micro-service-server
+
+  micro-service-server:
+    image: micro-service-server
+    ports:
+      - "9000:9000"

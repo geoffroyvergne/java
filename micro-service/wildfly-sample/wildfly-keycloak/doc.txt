@@ -1,0 +1,25 @@
+
+http://wildfly-swarm.io/generator/
+Wildfly Swarm
+
+mvn clean package
+
+mvn -Dswarm.http.port=8081 wildfly-swarm:run
+http://localhost:8081/auth
+
+java -Dswarm.http.port=8081 -jar target/wildfly-swarm-1.0.0-SNAPSHOT-swarm.jar
+http://localhost:8081/auth
+
+
+http://blog.keycloak.org/2015/10/getting-started-with-keycloak-securing.html
+
+RESULT=`curl --data "grant_type=password&client_id=curl&username=user&password=user" http://localhost:8081/auth/realms/master/protocol/openid-connect/token`
+echo $RESULT
+
+TOKEN=`echo $RESULT | sed 's/.*access_token":"//g' | sed 's/".*//g'`
+echo $TOKEN
+
+curl http://localhost:8082/secured/test -H "Authorization: bearer $TOKEN"
+
+curl -il http://localhost:8080/jee-base-web/rest/index/test -H "Authorization: bearer $TOKEN"
+curl -il http://localhost:8080/jee-base-web/rest/index/test

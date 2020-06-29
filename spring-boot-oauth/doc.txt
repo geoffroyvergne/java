@@ -1,0 +1,21 @@
+mvn clean install
+
+docker run --rm -it --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube:alpine
+mvn sonar:sonar
+
+. create-token.sh
+
+echo $TOKEN_USER
+echo $TOKEN_ADMIN
+
+OAuth2ServerConfiguration :
+InMemoryTokenStore
+
+configure
+clients.inMemory
+
+WebSecurityConfiguration :
+
+configure
+auth.inMemoryAuthentication
+

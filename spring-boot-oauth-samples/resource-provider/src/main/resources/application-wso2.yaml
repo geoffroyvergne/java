@@ -1,0 +1,9 @@
+
+security:
+  oauth2:
+    client:
+      clientId: "7mETTt_RwUw76kksO_KWyWBkPb4a"
+      clientSecret: "tJjJbXyTX5mVRdjHyilKOf4XB1ka"
+    resource:
+      # tokenInfoUri: "https://localhost:9443/oauth2/introspect"
+      userInfoUri: "https://localhost:9443/oauth2/userinfo?schema=openid"

@@ -1,0 +1,22 @@
+server:
+  port: 8181
+  contextPath: /
+
+spring:
+  application:
+    name: spring-cloud-stream-kafka-consumer
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: timerTopic
+          content-type: application/json
+          group: timerGroup
+      kafka:
+        bindings:
+          input:
+            consumer:
+              resetOffsets: '1'
+        binder:
+          zkNodes: zookeeper
+          brokers: kafka

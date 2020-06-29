@@ -1,0 +1,9 @@
+
+security:
+  oauth2:
+    client:
+      clientId: "test"
+      clientSecret: "e85f61f0-6d04-4095-ac64-621aefad2de9"
+    resource:
+      tokenInfoUri: "http://localhost:8080/auth/realms/test/protocol/openid-connect/token/introspect"
+      userInfoUri: "http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo"

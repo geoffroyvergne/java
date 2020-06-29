@@ -1,0 +1,10 @@
+.DS_Store
+.classpath
+.gitignore.swp
+.idea/
+.project
+.settings/
+sulfur.iml
+target/
+distrib/
+*.iml

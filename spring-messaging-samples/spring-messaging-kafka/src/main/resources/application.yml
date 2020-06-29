@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: spring-messaging-kafka
+
+configuration:
+  kafka:
+    bootstrapServers: docker-server:9092
+    group: group1

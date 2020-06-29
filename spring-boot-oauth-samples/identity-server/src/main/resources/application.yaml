@@ -1,0 +1,7 @@
+server:
+  port: 9000
+  contextPath: /identity
+
+logging:
+  level:
+    org: INFO

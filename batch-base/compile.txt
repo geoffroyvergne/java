@@ -1,0 +1,6 @@
+compile :
+mvn clean install
+
+launch :
+unzip target/batch-base-executable.zip
+java -jar batch-base/batch-base.jar -h

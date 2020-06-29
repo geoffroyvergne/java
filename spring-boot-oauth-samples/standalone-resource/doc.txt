@@ -1,0 +1,6 @@
+curl -u 6FygBgLstJU_wDgejFV5WjZ1blwa:hxGlUDmWrGix2AtTz5YZ6xlA9qUa -k \
+-d "grant_type=password" \
+-d "username=user" \
+-d "password=user123" \
+-H "Content-Type:application/x-www-form-urlencoded" \
+https://localhost:9443/oauth2/token?scope=openid

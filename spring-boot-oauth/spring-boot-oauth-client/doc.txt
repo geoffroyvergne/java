@@ -1,0 +1,63 @@
+spring-boot-oauth-client
+
+mvn clean package
+mvn spring-boot:run
+
+Access token :
+curl -X POST -kliu clientapp2:1234562 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d grant_type=password \
+    -d scope=read%20write \
+    -d client_id=clientapp2 \
+    -d client_secret=1234562 \
+    -d username=user \
+    -d password=user
+
+curl -X POST -liu \
+    clientapp:123456 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d "password=user&username=user&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp" \
+    | python -mjson.tool
+
+-d redirect_uri=http://www.hascode.com
+
+{
+    "access_token":"0bacfb6d-399d-4a8c-bf74-a147c75b1d88",
+    "token_type":"bearer",
+    "refresh_token":"d4c8d1da-29d2-452c-b641-ca3de15db4e7",
+    "expires_in":43199,
+    "scope":"openid"
+}
+
+curl -li http://localhost:9001/secured/test | python -mjson.tool
+curl -li http://localhost:9001/index/test | python -mjson.tool
+
+curl -li http://localhost:9000/secured/user | python -mjson.tool
+
+curl -li -H "Authorization: Bearer d27df266-49cc-468e-b632-9f06eaa481a9" http://localhost:9001/secured/test
+
+curl -li -H "Authorization: Bearer 3cbbde0f-dd75-41d3-8eae-088ceb7a5b83" http://localhost:9000/auth/user | python -mjson.tool
+
+curl -li -H "Authorization: Bearer 867cf521-a804-4ba2-b7b9-b8e0eaa54998" http://localhost:9000/auth/me | python -mjson.tool
+
+
+Refresh token :
+curl -li --data \
+    "grant_type=refresh_token&client_id=clientapp&refresh_token=96ddca13-d727-49a0-8b2b-89b572bebfae" \
+    -k clientapp:123456@localhost:9000/oauth/token \
+    | python -mjson.tool
+
+curl -liu \
+    clientapp:123456 \
+    http://localhost:9000/oauth/token \
+    -d grant_type=refresh_token \
+    -d client_id=clientapp \
+    -d refresh_token=96ddca13-d727-49a0-8b2b-89b572bebfae \
+    -d scope=read%20write \
+    -d client_id=clientapp \
+    -d client_secret=123456 \
+    -d username=user \
+    -d password=user \
+    | python -mjson.tool

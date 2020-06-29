@@ -1,0 +1,38 @@
+
+http://wildfly-swarm.io/generator/
+Wildfly Swarm
+
+mvn clean package
+
+mvn -Dswarm.http.port=8082 -Dswarm.logging=INFO wildfly-swarm:run
+http://localhost:8082/index/test
+
+https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/configuration_properties.html
+https://github.com/wildfly-swarm-archive/wildfly-swarm-spi/blob/master/src/main/java/org/wildfly/swarm/spi/api/SwarmProperties.java
+
+String ENVIRONMENT = "swarm.environment";
+String PROJECT_STAGE = "swarm.project.stage";
+
+java -Dswarm.http.port=8082 -jar target/wildfly-swarm-1.0.0-SNAPSHOT-swarm.jar -b 0.0.0.0
+
+http://localhost:8082/index/test
+
+curl http://localhost:8082/index/test
+curl http://localhost:8082/secured/test
+
+------------
+
+http://blog.keycloak.org/2015/10/getting-started-with-keycloak-securing.html
+
+curl --data "grant_type=password&client_id=curl&username=user&password=user&client_secret=d5b0e9a5-73f6-4ad2-a80a-d47dfc0a7b87" http://localhost:8081/auth/realms/master/protocol/openid-connect/token
+
+RESULT=`curl --data "grant_type=password&client_id=curl&username=user&password=user&client_secret=d5b0e9a5-73f6-4ad2-a80a-d47dfc0a7b87" http://localhost:8081/auth/realms/master/protocol/openid-connect/token`
+echo $RESULT
+
+TOKEN=`echo $RESULT | sed 's/.*access_token":"//g' | sed 's/".*//g'`
+echo $TOKEN
+
+curl -il http://localhost:8082/secured/test
+
+curl -il http://localhost:8082/secured/test -H "Authorization: bearer $TOKEN"
+

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  rabbitmq:
+    image: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  messaging-master:
+    image: springio/spring-messaging-master
+    depends_on:
+      - rabbitmq
+
+  messaging-slave:
+    image: springio/spring-messaging-slave
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+

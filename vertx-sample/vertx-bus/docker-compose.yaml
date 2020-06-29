@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+
+  vertx-bux-producer-service:
+    image: vertx-bus
+    command: run --cluster com.base.ProducerVerticle
+
+  vertx-bux-consumer-service:
+    image: vertx-bus
+    command: run --cluster com.base.ConsumerVerticle

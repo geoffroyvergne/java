@@ -1,0 +1,11 @@
+server:
+  port: 9001
+  contextPath: /resource
+
+logging:
+  level:
+    org: INFO
+
+spring:
+  profile:
+    active: spring

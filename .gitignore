@@ -1,0 +1,14 @@
+**/target/
+**/*.iml
+**/.idea/
+**/.DS_Store
+**/.gradle
+**/build/
+**/bin/
+.settings
+**/base
+**/old
+ancien/
+test/
+.metadata/
+maven-projects/

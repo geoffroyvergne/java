@@ -1,0 +1,18 @@
+http://howtoprogram.xyz/2016/09/23/spring-kafka-tutorial/
+http://docs.spring.io/spring-kafka/docs/1.1.2.RELEASE/reference/html/_introduction.html
+
+check that topic1 topic exists with 10 partitions
+./bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+Create topic partition
+./bin/kafka-topics.sh --create --zookeeper 1localhost:2181 --replication-factor 1 --partitions 10 --topic topic1
+
+Topic details
+./bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic topic1
+
+Change partitions number
+./bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --partitions 10
+
+
+mvn clean spring-boot:run -Dspring.profiles.active=master
+mvn clean spring-boot:run -Dspring.profiles.active=slave

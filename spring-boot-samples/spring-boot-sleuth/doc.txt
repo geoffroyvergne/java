@@ -1,0 +1,6 @@
+docker run --rm -p 9411:9411 openzipkin/zipkin
+
+mvn spring-boot:run
+
+curl localhost:8080/index/call/other
+curl localhost:8080/index/call/test

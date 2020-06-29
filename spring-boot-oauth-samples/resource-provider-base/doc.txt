@@ -1,0 +1,17 @@
+https://bitbucket.org/hascode/spring-oauth2-example/src
+
+mvn spring-boot:run
+
+curl -XPOST -k test:secret@localhost:9000/identity/oauth/token \
+ -d grant_type=password \
+ -d client_id=test \
+ -d client_secret=secret \
+ -d username=user \
+ -d password=user
+
+TOKEN='e2ed9782-9c69-410a-bcb8-cb05200755cf'
+
+curl http://localhost:9001/resource/
+
+curl -H "Authorization: Bearer $TOKEN" http://localhost:9001/resource/
+

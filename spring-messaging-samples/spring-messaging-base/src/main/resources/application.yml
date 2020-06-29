@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-messaging-base
+  rabbitmq:
+    host: 192.18.56.20
+    port: 5672

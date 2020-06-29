@@ -1,0 +1,18 @@
+server:
+  port: 8282
+  contextPath: /
+
+spring:
+  application:
+    name: spring-cloud-stream-kafka-producer
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: timerTopic
+          content-type: application/json
+      kafka:
+        binder:
+          zkNodes: zookeeper
+          brokers: kafka
+          

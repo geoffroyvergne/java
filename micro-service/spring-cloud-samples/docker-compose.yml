@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  test-service:
+    image: springio/test-service
+    restart: unless-stopped
+    depends_on:
+      - micro-service-server
+
+  sso-server:
+    image: springio/sso-server
+    restart: unless-stopped
+    ports:
+      - "5050:5050"
+
+  micro-service-server:
+    image: springio/micro-service-server
+    restart: unless-stoped
+    depends_on:
+      - sso-server
+    ports:
+      - "9000:9000"

@@ -1,0 +1,15 @@
+
+https://spring.io/guides/gs/spring-boot/
+Spring boot
+
+mvn clean package
+mvn spring-boot:run
+
+gradle build
+gradle bootRun
+
+java -jar target/spring-boot-0.1.0.jar
+
+java -jar -Dspring.profiles.active=production target/spring-boot-0.1.0.jar --server.port=8082
+
+curl http://localhost:8080/index/test | python -mjson.tool

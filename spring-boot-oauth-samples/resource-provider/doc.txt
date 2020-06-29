@@ -1,0 +1,25 @@
+
+mvn spring-boot:run -Drun.jvmArguments="-Dspring.profiles.active=keycloak"
+
+curl -XPOST -k foo:foosecret@localhost:9000/identity/oauth/token \
+ -d grant_type=password \
+ -d client_id=foo \
+ -d client_secret=foosecret \
+ -d username=user \
+ -d password=user
+
+ACCESS_TOKEN='7ce02e05-135e-4efc-ae07-3387869e0c11'
+
+curl http://localhost:9001/resource/secured/test
+
+curl -H "Authorization: Bearer $TOKEN" http://localhost:9001/resource/secured/test
+
+curl -v -H "Authorization: Bearer $ACCESS_TOKEN" http://localhost:9000/identity/user
+
+-- Refresh token
+
+REFRESH_TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjA4NDYxMzIsInVzZXJfbmFtZSI6InVzZXIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiM2UyNjVhMzUtNmY4OS00ZDI1LWJmODMtNGQ0YzcxMzg5MjZlIiwiY2xpZW50X2lkIjoiZm9vIiwic2NvcGUiOlsib3BlbmlkIl19.BwAc-25MPg7tAECskKm-_KcLCpjk7rSAk97Vz7HL3yU';
+
+curl -XPOST -k foo:foosecret@localhost:9000/identity/oauth/token \
+    -d grant_type=refresh_token \
+    -d refresh_token=$REFRESH_TOKEN

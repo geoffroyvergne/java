@@ -1,0 +1,52 @@
+server:
+  port: 9000
+  contextPath: /
+
+#security:
+#  user:
+#    name: user
+#    password: user
+
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+
+test:
+  value: "test value"
+
+oauthClients:
+  clients:
+    -
+      name: clientapp
+      secret: 123456
+      accessTokenValiditySeconds: 7200
+      authorizedGrantTypes:
+        - authorization_code
+        - refresh_token
+        - password
+      scopes:
+        - read
+        - write
+      resourcesId:
+        - restservice
+    -
+      name: clientapp2
+      secret: 1234562
+      accessTokenValiditySeconds: 7200
+      authorizedGrantTypes:
+        - authorization_code
+        - refresh_token
+        - password
+      resourcesId:
+        - restservice
+      scopes:
+        - read
+        - write
+
+logging:
+  level:
+    org.hibernate.SQL: debug

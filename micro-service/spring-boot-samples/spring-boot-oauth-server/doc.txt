@@ -1,0 +1,22 @@
+spring-boot-oauth-server
+
+mvn clean package
+mvn spring-boot:run
+
+Access token :
+curl -X POST -kliu clientapp:123456 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d grant_type=password \
+    -d scope=read%20write \
+    -d client_id=clientapp \
+    -d client_secret=123456 \
+    -d username=user \
+    -d password=user \
+    | python -mjson.tool
+
+
+
+.accessTokenValiditySeconds(oauthClient.getAccessTokenValiditySeconds())
+.resourceIds(oauthClient.getResourcesId())
+tokenServices.setAccessTokenValiditySeconds(300);

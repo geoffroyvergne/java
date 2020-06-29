@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /
+
+spring:
+  application:
+    name: zipkin-server1
+
+  #zipkin:
+  #  baseUrl: http://localhost:9411/
+
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0

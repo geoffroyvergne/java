@@ -1,0 +1,33 @@
+spring-boot-oauth-server
+
+mvn clean package
+mvn spring-boot:run
+
+.accessTokenValiditySeconds(oauthClient.getAccessTokenValiditySeconds())
+.resourceIds(oauthClient.getResourcesId())
+tokenServices.setAccessTokenValiditySeconds(300);
+
+Access token :
+curl -X POST -kliu clientapp2:1234562 \
+    http://localhost:9000/oauth/token \
+    -H "Accept: application/json" \
+    -d grant_type=password \
+    -d scope=read%20write \
+    -d client_id=clientapp2 \
+    -d client_secret=1234562 \
+    -d username=user \
+    -d password=user \
+    | python -mjson.tool
+
+
+echo $TOKEN_USER
+echo $TOKEN_ADMIN
+
+curl -li -H "Authorization: Bearer $TOKEN_USER" http://localhost:9000/auth/user
+
+curl -li -H "Authorization: Bearer $TOKEN_USER" http://localhost:9000/auth/me
+
+
+curl -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/secured/test | python -mjson.tool
+
+curl -li -H "Authorization: Bearer $TOKEN_USER" http://localhost:9001/admin/test

@@ -1,0 +1,3 @@
+
+mvn clean package docker:build
+docker-compose scale messaging-slave=2

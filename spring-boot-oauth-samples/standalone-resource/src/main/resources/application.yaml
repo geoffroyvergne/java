@@ -1,0 +1,7 @@
+server:
+  port: 9002
+  contextPath: /standalone-resource
+
+logging:
+  level:
+    org: INFO

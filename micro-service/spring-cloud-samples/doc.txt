@@ -1,0 +1,46 @@
+mvn clean package
+
+mvn spring-boot:run
+
+http://localhost:9098/index/test
+
+mvn package docker:build
+
+docker run -p 9098:9098 -t springio/test-service
+
+docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 9098:9098 -p 5005:5005 -t springio/test-service
+
+http://ryanjbaxter.com/2015/12/15/building-cloud-native-applications-with-spring-part-8/
+https://github.com/ExampleDriven/spring-boot-docker-example
+https://github.com/bijukunjummen/sample-spring-hystrix
+
+mvn clean install
+docker-compose up
+docker-compose scale test-service=2
+
+docker-compose stop debug-service
+
+http://localhost:9000/
+http://localhost:9000/hystrix
+http://localhost:9000/api/debug/debug/echo
+http://localhost:9000/hystrix.stream
+http://localhost:9000/api/test/debug/echo
+http://localhost:9000/api/test/index/test
+
+http://localhost:9000/hystrix/monitor?stream=micro-service-server%3A9000%2Fhystrix.stream
+
+SSO :
+curl http://localhost:9000/api/test/secured/test
+
+curl -li -H "Authorization: Bearer b128b458-0f56-4519-8ce0-0a9a61d98b81" http://localhost:9000/api/test/secured/test
+
+Access token :
+curl -X POST -kliu clientapp2:1234562 \
+    http://localhost:5050/oauth/token \
+    -H "Accept: application/json" \
+    -d grant_type=password \
+    -d scope=read%20write \
+    -d client_id=clientapp2 \
+    -d client_secret=1234562 \
+    -d username=user \
+    -d password=user

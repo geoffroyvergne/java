@@ -1,0 +1,27 @@
+server:
+  port: 9001
+  contextPath: /oauthclient
+
+security:
+  oauth2:
+    resource:
+      #spring
+      user-info-uri: http://localhost:9000/oauthserver/auth/user
+      #keycloak
+      #user-info-uri: http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo
+      #preferTokenInfo: false
+      #wso2
+      #user-info-uri: http://localhost:9763/oauth2/userinfo?schema=openid
+      #user-info-uri: https://localhost:9443/oauth2/userinfo?schema=openid
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true

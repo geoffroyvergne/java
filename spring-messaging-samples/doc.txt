@@ -1,0 +1,9 @@
+
+mvn clean package docker:build
+
+docker-compose up
+docker-compose scale kafka-consumer=2
+docker-compose up kafka-producer
+
+docker-compose rm -f
+docker volume rm $(docker volume ls -f dangling=true -q)

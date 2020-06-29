@@ -1,0 +1,33 @@
+thorntail:
+
+  http:
+    port: ${env.APPLICATION_PORT:8080}
+  context:
+    path:  ${env.APPLICATION_CONTEXT:/api/backend}
+
+  ee:
+    spec-descriptor-property-replacement: true
+
+  logging:
+    loggers:
+      com.example.thorntail.jpa:
+        level: DEBUG
+
+  deployment:
+    jpa.war:
+      swagger:
+        packages:
+          - com.example.thorntail.jpa
+
+  datasources:
+    jdbc-drivers:
+      org.postgresql:
+        driver-class-name: org.postgresql.Driver
+        xa-datasource-class-name: org.postgresql.xa.PGXADataSource
+        driver-module-name: org.postgresql
+    data-sources:
+      postgresqlDS:
+        driver-name: org.postgresql
+        connection-url: jdbc:postgresql://${env.DATABASE_HOST:localhost}:${env.DATABASE_PORT:5432}/${env.DATABASE_BASE:employee}
+        user-name: ${env.DATABASE_USER:employee}
+        password: ${env.DATABASE_PASSWORD:employee}

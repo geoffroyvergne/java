@@ -1,0 +1,40 @@
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic topic1
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic twitter-topic
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic twitter-topic
+
+
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+docker exec -it springmessagingsamples_kafka_1 bash
+
+
+- Kafka connect
+
+echo -e "foo\nbar" > test.txt
+
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+
+cat test.sink.txt
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-test --from-beginning
+
+echo "Another line" >> test.txt
+
+- Kafka stream
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --topic twitter-topic
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+            --topic twitter-topic \
+            --from-beginning \
+            --formatter kafka.tools.DefaultMessageFormatter \
+            --property print.key=true \
+            --property print.value=true \
+            --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+            --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer

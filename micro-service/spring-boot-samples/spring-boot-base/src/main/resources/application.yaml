@@ -1,0 +1,6 @@
+test:
+  value: "test value"
+
+configObject:
+  name: test
+  value: test value

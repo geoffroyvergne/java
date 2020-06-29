@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: turbine-server
+  rabbitmq:
+    addresses: rabbit-mq-server:5672
+
+server:
+  port: 5050
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+

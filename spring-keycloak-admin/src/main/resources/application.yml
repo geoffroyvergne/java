@@ -1,0 +1,11 @@
+server:
+  port: 8081
+  contextPath: /
+
+keycloak:
+  serverUrl: "http://localhost:8080/auth"
+  realm: "master"
+  clientId: "admin-cli"
+  username: "admin"
+  password: "admin123!"
+  

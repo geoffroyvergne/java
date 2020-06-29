@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  redis:
+    image: redis:3.2.5-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - /data/db/docker/redis-spring-boot-oauth:/data
+
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=springoauth
+      - MYSQL_USER=springoauth
+      - MYSQL_PASSWORD=springoauth
+    ports:
+      - "3306:3306"
+    volumes:
+      - /data/db/docker/mariadb-spring-boot-oauth:/var/lib/mysql

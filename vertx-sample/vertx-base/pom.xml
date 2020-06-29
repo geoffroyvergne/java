@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>vertx-base</artifactId>
+  <version>0.1.0</version>
+
+  <parent>
+    <artifactId>vertx-sample</artifactId>
+    <groupId>com.base</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <properties>
+    <main.basedir>${basedir}/..</main.basedir>
+    <!--<vertx.verticle>com.base.MainVerticle</vertx.verticle>-->
+  </properties>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>vertx-maven-plugin</artifactId>
+        <version>${vertx-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>vmp</id>
+            <goals>
+              <goal>initialize</goal>
+              <goal>package</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <redeploy>true</redeploy>
+          <!--<runArgs>
+            <runArg>-conf src/main/conf/application.json</runArg>
+          </runArgs>-->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

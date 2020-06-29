@@ -1,0 +1,11 @@
+server:
+  port: 8181
+  servlet:
+    contextPath: /api/test
+
+test:
+  value: "test value"
+
+configobject:
+  name: test
+  value: test value

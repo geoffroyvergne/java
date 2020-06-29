@@ -1,0 +1,31 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: micro-service-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://micro-service-server:9000/eureka/
+
+zuul:
+  prefix: /api
+  ignoredServices: '*'
+  routes:
+    test:
+      path: /test/**
+      serviceId: test-service
+    debug:
+      path: /debug/**
+      serviceId: debug-service
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+
+turbine:
+  aggregator:
+    clusterConfig: TEST-SERVICE
+    appConfig: TEST-SERVICE
+

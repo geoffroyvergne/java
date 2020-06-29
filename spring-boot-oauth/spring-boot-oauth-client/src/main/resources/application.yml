@@ -1,0 +1,16 @@
+server:
+  port: 9001
+  contextPath: /
+
+resourceServer:
+  resourceId: restservice
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9000/auth/user
+
+services:
+  oauthServer: http://localhost:9000/
+  oauthClient: http://localhost:9001/
+

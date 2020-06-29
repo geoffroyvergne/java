@@ -1,0 +1,16 @@
+
+security:
+  oauth2:
+    client:
+      # accessTokenUri: http://localhost:9000/identity/oauth/token
+      # userAuthorizationUri: http://localhost:9000/identity/oauth/authorize
+      # grant-type: implicit
+      clientId: "implicittest"
+      clientSecret: "secret"
+      # authenticationScheme: query
+      # clientAuthenticationScheme: form
+      # tokenName: access_token
+    resource:
+      tokenInfoUri: "http://localhost:9000/identity/oauth/check_token"
+      # userInfoUri: "http://localhost:9000/identity/user"
+      # preferTokenInfo: false
